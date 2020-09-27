@@ -57,10 +57,12 @@
 					<li class="no-data text-center">
 						No notes yet.
 					</li>
+					@foreach ($notes as $note)
+						
 					<li class="data-list">
 						<div class="data-text">
-							<p class="text-class">Enim ad cupidatat officia exercitation incididunt aute voluptate incididunt quis laborum laborum labore minim voluptate quis sit dolor esse sint excepteur velit amet in dolore minim excepteur magna commodo do aute do reprehenderit ea sed.</p>
-							<p class="date">October 20, 2020 | 12:14pm</p>
+						<p class="text-class">{{ $note->note }}</p>
+							<p class="date">{{ date("M d, Y h:ia", strtotime($note->created_at))	}}</p>
 						</div>
 						<div class="actions">
 							<div class="row">
@@ -75,43 +77,8 @@
 							</div>
 						</div>
 					</li>
-					<li class="data-list">
-						<div class="data-text">
-							<p class="text-class">Enim ad cupidatat officia exercitation incididunt aute voluptate incididunt quis laborum laborum labore minim voluptate quis sit dolor esse sint excepteur velit amet in dolore minim excepteur magna commodo do aute do reprehenderit ea sed.</p>
-							<p class="date">October 20, 2020 | 12:14pm</p>
-						</div>
-						<div class="actions">
-							<div class="row">
-								<div class="col text-center">
-									<a href="#" class="edit">Edit</a>
-								</div>
-								<div class="col text-center">
-									<form action="">
-										<a href="#" class="delete">Delete</a>
-									</form>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="data-list">
-						<div class="data-text">
-							<p class="text-class">Enim ad cupidatat officia exercitation incididunt aute voluptate incididunt quis laborum laborum labore minim voluptate quis sit dolor esse sint excepteur velit amet in dolore minim excepteur magna commodo do aute do reprehenderit ea sed.</p>
-							<p class="date">October 20, 2020 | 12:14pm</p>
-						</div>
-						<div class="actions">
-							<div class="row">
-								<div class="col text-center">
-									<a href="#" class="edit">Edit</a>
-								</div>
-								<div class="col text-center">
-									<form action="">
-										<a href="#" class="delete">Delete</a>
-									</form>
-								</div>
-							</div>
-						</div>
-					</li>
-					
+
+					@endforeach
 				</ul>
 			</div>
 		</section>
