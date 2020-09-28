@@ -71,9 +71,7 @@
 									<a href="{{ route('note.edit', $note->id) }}" class="edit">Edit</a>
 								</div>
 								<div class="col text-center">
-									<form action="">
-										<a href="#" class="delete" data-toggle="modal" data-target="delete-modal-{{ $note->id }}">Delete</a>
-									</form>
+									<a href="#" class="delete" data-toggle="modal" data-target="#delete-modal-{{ $note->id }}">Delete</a>
 								</div>
 							</div>
 						</div>
@@ -82,17 +80,21 @@
 						<div class="modal-dialog">
 						  <div class="modal-content">
 							<div class="modal-header">
-							  <h5 class="modal-title">Modal title</h5>
+							  <h5 class="modal-title">Delete Note</h5>
 							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							  </button>
 							</div>
 							<div class="modal-body">
-							  <p>Modal body text goes here.</p>
+							  <p>{{ \Illuminate\Support\Str::limit($note->body, 10) }}</p>
 							</div>
 							<div class="modal-footer">
 							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							  <button type="button" class="btn btn-primary">Save changes</button>
+							<form action="{{ route('note.destroy', $note->id) }}" method="POST">
+								@csrf
+								@method('DELETE')
+								<button type="submit" class="btn btn-primary" >Delete</button>
+							  </form>
 							</div>
 						  </div>
 						</div>
