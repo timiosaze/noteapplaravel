@@ -68,21 +68,40 @@
 						<div class="actions">
 							<div class="row">
 								<div class="col text-center">
-									<a href="#" class="edit">Edit</a>
+									<a href="{{ route('note.edit', $note->id) }}" class="edit">Edit</a>
 								</div>
 								<div class="col text-center">
 									<form action="">
-										<a href="#" class="delete">Delete</a>
+										<a href="#" class="delete" data-toggle="modal" data-target="delete-modal-{{ $note->id }}">Delete</a>
 									</form>
 								</div>
 							</div>
 						</div>
 					</li>
-
+					<div class="modal" id="delete-modal-{{ $note->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <h5 class="modal-title">Modal title</h5>
+							  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+							<div class="modal-body">
+							  <p>Modal body text goes here.</p>
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							  <button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						  </div>
+						</div>
+					</div>
 					@endforeach
 				</ul>
 			</div>
 		</section>
+		
 		<section class="section">
 			<div class="paginate">
 				<a href="#" class="btn btn-outline-primary">Prev</a>

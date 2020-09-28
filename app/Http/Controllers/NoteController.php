@@ -64,24 +64,33 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Note  $note
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Note $note)
+    public function edit($id)
     {
         //
+        $note = Note::findOrFail($id);
+        return view('note.edit', ['note' => $note]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Note  $note
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
+    public function update($id)
     {
         //
+        $note = Note::findOrFail($id);
+        request()->validate([
+            'body' => 'required'
+        ]);
+        $note->body = request('body');
+        $note->save();
+
+        return redirect('/notes');
     }
 
     /**
