@@ -40,11 +40,12 @@
 		<section class="section">
 			<div class="create-form">
 				<h3>New Note</h3>
-				<form action="">
+				<form action="{{ route('note.store') }}" method="POST">
+					@csrf
 					<div class="form-group">
-						<textarea name="" id="" cols="20" rows="3" class="form-control"></textarea>
+						<textarea name="body" id="" cols="20" rows="3" class="form-control"></textarea>
 					</div>
-					<button class="btn-primary btn float-right">Create</button>
+					<button class="btn-primary btn float-right" name="submit">Create</button>
 					<div class="clearfix"></div>
 				</form>
 			</div>
@@ -61,7 +62,7 @@
 						
 					<li class="data-list">
 						<div class="data-text">
-						<p class="text-class">{{ $note->note }}</p>
+						<p class="text-class">{{ $note->body }}</p>
 							<p class="date">{{ date("M d, Y h:ia", strtotime($note->created_at))	}}</p>
 						</div>
 						<div class="actions">

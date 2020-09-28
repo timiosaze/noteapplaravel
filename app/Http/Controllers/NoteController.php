@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Note;
+use DB;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -15,7 +16,7 @@ class NoteController extends Controller
     public function index()
     {
         //
-        $notes = Note::all();
+        $notes = Note::orderBy('id', 'desc')->get();
 
         return view('note.index', ['notes' => $notes]);
     }
@@ -39,6 +40,14 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'body' => 'required'
+        ]);
+        $note = new Note();
+        $note->body = request('body');
+        $note->save();
+
+        return redirect('/notes');
     }
 
     /**

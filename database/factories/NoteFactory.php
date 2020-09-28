@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Note::class, function (Faker $faker) {
     return [
         //
-        'note' =>  $faker->realText($maxNbChars = 200),
+        'body' =>  $faker->realText($maxNbChars = 200),
     ];
 });
