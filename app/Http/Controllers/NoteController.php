@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Note;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class NoteController extends Controller
     public function index()
     {
         //
-        $notes = Note::orderBy('id', 'desc')->get();
+        // return Auth::id();
+        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
 
         return view('note.index', ['notes' => $notes]);
     }
@@ -49,6 +51,7 @@ class NoteController extends Controller
         ]);
         $note = new Note();
         $note->body = request('body');
+        $note->user_id = Auth::id();
         $note->save();
 
         return redirect('/notes');
@@ -74,7 +77,7 @@ class NoteController extends Controller
     public function edit($id)
     {
         //
-        $note = Note::findOrFail($id);
+        $note = Note::where('user_id', Auth::id())->findOrFail($id);
         return view('note.edit', ['note' => $note]);
     }
 
@@ -87,7 +90,7 @@ class NoteController extends Controller
     public function update($id)
     {
         //
-        $note = Note::findOrFail($id);
+        $note = Note::where('user_id', Auth::id())->findOrFail($id);
         request()->validate([
             'body' => 'required'
         ]);
@@ -106,7 +109,7 @@ class NoteController extends Controller
     public function destroy($id)
     {
         //
-        $note = Note::findOrFail($id);
+        $note = Note::where('user_id', Auth::id())->findOrFail($id);
         $note->delete();
 
         return redirect('/notes');

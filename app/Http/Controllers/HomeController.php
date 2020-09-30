@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Note;
+use Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
+
+        return view('note.index', ['notes' => $notes]);
     }
 }

@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('note.index');
+// });
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/notes', 'NoteController@index');
 Route::post('/notes', 'NoteController@store')->name('note.store');
 Route::get('/notes/{id}/edit', 'NoteController@edit')->name('note.edit');
@@ -21,7 +23,6 @@ Route::put('/notes/{id}', 'NoteController@update')->name('note.update');
 Route::delete('/notes/{id}', 'NoteController@destroy')->name('note.destroy');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
