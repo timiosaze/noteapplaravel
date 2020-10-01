@@ -22,9 +22,9 @@ class NoteController extends Controller
     {
         //
         // return Auth::id();
-        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
+        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->paginate(15);
 
-        return view('note.index', ['notes' => $notes]);
+        return view('note.index', ['notes' => $notes])->with('success', 'Welcome to your Notes');
     }
 
     /**
@@ -52,9 +52,13 @@ class NoteController extends Controller
         $note = new Note();
         $note->body = request('body');
         $note->user_id = Auth::id();
-        $note->save();
 
-        return redirect('/notes');
+        if($note->save()){
+            return redirect('/notes')->with('success', 'New Note saved');
+        } else {
+            return redirect('/notes')->with('failure', 'Note not saved');
+        }
+
     }
 
     /**
@@ -95,9 +99,12 @@ class NoteController extends Controller
             'body' => 'required'
         ]);
         $note->body = request('body');
-        $note->save();
 
-        return redirect('/notes');
+        if($note->save()){
+            return redirect('/notes')->with('success', 'Note updated successfully');
+        } else {
+            return redirect('/notes')->with('failure', 'Note not updated');
+        }
     }
 
     /**
@@ -110,8 +117,11 @@ class NoteController extends Controller
     {
         //
         $note = Note::where('user_id', Auth::id())->findOrFail($id);
-        $note->delete();
 
-        return redirect('/notes');
+        if($note->delete()){
+            return redirect('/notes')->with('success', 'Note deleted successfully');
+        } else {
+            return redirect('/notes')->with('failure', 'Note not deleted');
+        }
     }
 }
