@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Note;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -22,12 +24,15 @@ class LoginController extends Controller
     use AuthenticatesUsers {
         logout as doLogout;
     }
+
+    
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/notes';
+    protected $redirectTo = '/notes?page=1';
 
     /**
      * Create a new controller instance.

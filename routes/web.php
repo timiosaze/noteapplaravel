@@ -16,7 +16,7 @@
 // });
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/notes', 'NoteController@index');
+Route::get('/notes', 'NoteController@index')->name('note.index');
 Route::post('/notes', 'NoteController@store')->name('note.store');
 Route::get('/notes/{id}/edit', 'NoteController@edit')->name('note.edit');
 Route::put('/notes/{id}', 'NoteController@update')->name('note.update');

@@ -22,7 +22,7 @@ class NoteController extends Controller
     {
         //
         // return Auth::id();
-        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->paginate(15);
+        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->paginate(2);
 
         return view('note.index', ['notes' => $notes])->with('success', 'Welcome to your Notes');
     }

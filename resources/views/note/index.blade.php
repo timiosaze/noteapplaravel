@@ -4,17 +4,7 @@
 
 		<section class="section">
 			<div class="create-form">
-				@if (session('success'))
-					<div class="alert alert-primary" role="alert">
-						{{session('success')}}
-					</div>
-				@endif
-				@if (session('failure'))
-					<div class="alert alert-danger" role="alert">
-						{{session('failure')}}
-					</div>
-				@endif
-				
+				@include('includes.session')
 				<h3>New Note</h3>
 				<form action="{{ route('note.store') }}" method="POST">
 					@csrf
