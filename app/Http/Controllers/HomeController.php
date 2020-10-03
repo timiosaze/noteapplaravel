@@ -25,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
+        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->paginate(15);
 
-        return view('note.index', ['notes' => $notes]);
+        return view('note.index', ['notes' => $notes])->with('success', 'Welcome to your Notes');
     }
+    
 }

@@ -4,6 +4,7 @@
 
 		<section class="section">
 			<div class="create-form">
+				@include('includes.validation')
 				@include('includes.session')
 				<h3>New Note</h3>
 				<form action="{{ route('note.store') }}" method="POST">

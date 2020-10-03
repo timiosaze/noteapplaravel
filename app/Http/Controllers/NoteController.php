@@ -22,7 +22,7 @@ class NoteController extends Controller
     {
         //
         // return Auth::id();
-        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->paginate(2);
+        $notes = Note::where('user_id',Auth::id())->orderBy('id', 'desc')->paginate(10);
 
         return view('note.index', ['notes' => $notes])->with('success', 'Welcome to your Notes');
     }
@@ -46,9 +46,8 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate([
-            'body' => 'required'
-        ]);
+        $this->NoteFormValidation();
+
         $note = new Note();
         $note->body = request('body');
         $note->user_id = Auth::id();
@@ -95,9 +94,7 @@ class NoteController extends Controller
     {
         //
         $note = Note::where('user_id', Auth::id())->findOrFail($id);
-        request()->validate([
-            'body' => 'required'
-        ]);
+        $this->NoteFormValidation();
         $note->body = request('body');
 
         if($note->save()){
@@ -123,5 +120,11 @@ class NoteController extends Controller
         } else {
             return redirect('/notes')->with('failure', 'Note not deleted');
         }
+    }
+
+    public function NoteFormValidation(){
+        return request()->validate([
+            'body' => 'required'
+        ]);
     }
 }
